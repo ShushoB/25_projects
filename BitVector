@@ -1,0 +1,30 @@
+class BitVector:
+    def __init__(self, size):
+        self.size = size
+        self.vector = [0] * (size // 32 + 1)
+
+    def get_bit(self, index):
+        bit = bool(self.vector[index // 32] & (1 << index % 32))
+        if 0 <= index < self.size:
+            print(int(bit))
+            return bit
+
+    def set_bit(self, index):
+        if 0 <= index < self.size:
+            self.vector[index // 32] |= (1 << index % 32)
+            bit = bool(self.vector[index // 32] | (1 << index % 32))
+            print(int(bit))
+
+    def reset_bit(self, index):
+        if 0 <= index < self.size:
+            self.vector[index // 32] &= ~(1 << index % 32)
+            bit = bool(self.vector[index // 32] & ~(1 << index % 32))
+            print(int(bit))
+
+
+vector = BitVector(100)
+vector.get_bit(11)
+vector.set_bit(11)
+vector.get_bit(11)
+vector.reset_bit(11)
+vector.get_bit(11)
